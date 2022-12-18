@@ -40,14 +40,14 @@ sudo apt install postgresql postgresql-contrib -y
     sudo passwd postgres
 8 Switch to the postgres user.
 
-    $ su - postgres
+    su - postgres
 9 Create a user named sonar.
 
-    $ createuser sonar
+    createuser sonar
 
 10 Log in to PostgreSQL.
 
-    $ psql
+    psql
 11 Set a password for the sonar user. Use a strong password in place of my_strong_password.
 
     ALTER USER sonar WITH ENCRYPTED password 'sonar';
@@ -73,13 +73,13 @@ sudo apt install postgresql postgresql-contrib -y
 
     Install the zip utility, which is needed to unzip the SonarQube files.
 ```
-    $ sudo apt-get install zip -y
+    sudo apt-get install zip -y
 ```
  16 Locate the latest download URL from the SonarQube official download page.
 
     Download the SonarQube distribution files.
 
-    $ sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.7.1.62043.zip
+    sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.7.1.62043.zip
 
   17 Unzip the downloaded file.
 
@@ -95,21 +95,21 @@ sudo apt install postgresql postgresql-contrib -y
 
     Create a sonar group.
 
-    $ sudo groupadd sonar
+    sudo groupadd sonar
 
     Create a sonar user and set /opt/sonarqube as the home directory.
 
-    $ sudo useradd -d /opt/sonarqube -g sonar sonar
+    sudo useradd -d /opt/sonarqube -g sonar sonar
 
     Grant the sonar user access to the /opt/sonarqube directory.
 
-    $ sudo chown sonar:sonar /opt/sonarqube -R
+    sudo chown sonar:sonar /opt/sonarqube -R
 
 21. Configure SonarQube
 
     Edit the SonarQube configuration file.
 ```bash
-    $ sudo nano /opt/sonarqube/conf/sonar.properties
+    sudo nano /opt/sonarqube/conf/sonar.properties
 
     Find the following lines:
 
