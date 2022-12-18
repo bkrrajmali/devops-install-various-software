@@ -50,13 +50,14 @@ sudo apt install postgresql postgresql-contrib -y
     $ psql
 11 Set a password for the sonar user. Use a strong password in place of my_strong_password.
 
-    ALTER USER sonar WITH ENCRYPTED password 'my_strong_password';
+    ALTER USER sonar WITH ENCRYPTED password 'sonar';
 
 12 Create a sonarqube database and set the owner to sonar.
 
+   ```bash
     CREATE DATABASE sonarqube OWNER sonar;
-
-    Grant all the privileges on the sonarqube database to the sonar user.
+```
+  Grant all the privileges on the qube database to the sonar user.
 
     GRANT ALL PRIVILEGES ON DATABASE sonarqube to sonar;
 
@@ -120,25 +121,26 @@ sudo apt install postgresql postgresql-contrib -y
 
     sonar.jdbc.username=sonar
 
-    sonar.jdbc.password=my_strong_password here we gave sonar as password
+    sonar.jdbc.password=sonar
+```
 
-    Below those two lines, add the sonar.jdbc.url.
+Below those two lines, add the sonar.jdbc.url.
 
-    sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
+    sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
 
-    Save and exit the file.
+ Save and exit the file.
+ 
+ Start the SonarQube service.
+```
+  sudo systemctl start sonar
 
-    Edit the sonar script file.
+  Check the service status.
 
+  sudo systemctl status sonar
  ```  
   22. Modify Kernel System Limits
 
-SonarQube uses Elasticsearch to store its indices in an MMap FS directory. It requires some changes to the system defaults.
-
-   Edit the sysctl configuration file.
-   
-```bash
-    $ sudo nano /etc/sysctl.conf
+    sudo nano /etc/sysctl.conf
 
     Add the following lines.
 
