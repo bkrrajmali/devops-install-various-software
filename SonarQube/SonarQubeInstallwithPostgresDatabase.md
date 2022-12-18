@@ -134,9 +134,10 @@ sudo apt install postgresql postgresql-contrib -y
   22. Modify Kernel System Limits
 
 SonarQube uses Elasticsearch to store its indices in an MMap FS directory. It requires some changes to the system defaults.
-```bash
-    Edit the sysctl configuration file.
 
+   Edit the sysctl configuration file.
+   
+```bash
     $ sudo nano /etc/sysctl.conf
 
     Add the following lines.
