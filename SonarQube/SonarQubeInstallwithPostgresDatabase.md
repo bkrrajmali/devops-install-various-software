@@ -155,7 +155,7 @@ SonarQube uses Elasticsearch to store its indices in an MMap FS directory. It re
 
     $ sudo reboot
 ```
-8. Access SonarQube Web Interface
+23. Access SonarQube Web Interface
 
 Access SonarQube in a web browser at your server's IP address on port 9000. For example:
 
