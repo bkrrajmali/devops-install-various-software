@@ -13,13 +13,13 @@
 
     Add the PostgreSQL repository.
 ```bash
-    $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
 ```
   
 3. Add the PostgreSQL signing key.
 
 ```bash
-    $ wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
+    wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
 ```
 
 4. Install PostgreSQL.
@@ -33,11 +33,11 @@ sudo apt install postgresql postgresql-contrib -y
 ```
 6. Start the database server.
 ```bash
-    $ sudo systemctl start postgresql
+   sudo systemctl start postgresql
 ```
 7 Change the default PostgreSQL password.
 
-    $ sudo passwd postgres
+    sudo passwd postgres
 8 Switch to the postgres user.
 
     $ su - postgres
