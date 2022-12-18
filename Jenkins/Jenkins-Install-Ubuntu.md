@@ -5,7 +5,6 @@ Step-1-First, open a terminal window and update the system package repository by
   ```bash 
     sudo apt update  
    ```
-
 Step-2- To install OpenJDK 8, run:
   ```bash 
   sudo apt install openjdk-8-jdk -y
@@ -27,9 +26,9 @@ Step-6- Finally, we’ll install Jenkins and its dependencies.
 sudo apt install jenkins
 ```
 
-Step-7- sudo systemctl start jenkins
+Step-7- sudo systemctl start jenkins 
 ```bash
-sudo systemctl status jenkins
+sudo systemctl status jenkins -y
 ```
 Step-8- Open the port if its blocked
 ```bash
