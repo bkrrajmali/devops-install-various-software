@@ -20,7 +20,7 @@ sudo useradd -m -s /bin/bash postgres -g postgres
 3. Create Passwords for both sonar and postgres as below:
 
 ```bash
-sudo passwd username
+sudo passwd sonar
 sudo passwd postgres
 ```
 4. visudo from root any sudo user and add both users to sudoers as below. Add sonar user and postgres user below root:
