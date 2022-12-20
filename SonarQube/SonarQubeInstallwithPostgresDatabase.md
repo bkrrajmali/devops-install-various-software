@@ -97,41 +97,31 @@ The embedded database will not scale, it will not support upgrading to newer ver
 
     sudo systemctl enable postgresql
     
-19. Now login to postgres user
- ```   
-    su - postgres
-```
-20 Create a user named sonar.
+19 Create a user named sonar.
 
     createuser sonar
 
-21 Log in to PostgreSQL.
+20 Log in to PostgreSQL.
 
     psql
 
-22 Set a password for the sonar user. Use a strong password in place of my_strong_password.
+21 Set a password for the sonar user. Use a strong password in place of my_strong_password.
 ```
     ALTER USER sonar WITH ENCRYPTED password 'sonar';
 ```
-23 Create a sonarqube database and set the owner to sonar.
+22 Create a sonarqube database and set the owner to sonar.
 
      CREATE DATABASE sonarqube OWNER sonar;
 
-24 Grant all the privileges on the sonarqube database to the sonar user.
+23 Grant all the privileges on the sonarqube database to the sonar user.
 
     GRANT ALL PRIVILEGES ON DATABASE sonarqube to sonar;
 
-25 Exit PostgreSQL.
+24 Exit PostgreSQL.
 
     \q
     
-26. Return to your non-root sudo user account.
-```
-    exit
-```
-sudo systemctl status sonar
-
-27. Configure SonarQube. Edit the SonarQube configuration file.
+25. Configure SonarQube. Edit the SonarQube configuration file.
 ```
     sudo nano /opt/sonarqube/conf/sonar.properties
 
@@ -140,10 +130,10 @@ sudo systemctl status sonar
     sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
     sonar.search.javaOpts=-Xmx512m -Xms512m -XX:MaxDirectMemorySize=256m -XX:+HeapDumpOnOutOfMemoryError
 ```
-28. Now start the Sonarqube 
+26. Now start the Sonarqube 
 ```
     sh /opt/sonarqube/bin/linux-x86-64/sonar.sh start
 ```
-29. Access SonarQube in a web browser at your server's IP address on port 9000. For example:
+27. Access SonarQube in a web browser at your server's IP address on port 9000. For example:
     ```
     http://192.168.31.226:9000/projects/create
