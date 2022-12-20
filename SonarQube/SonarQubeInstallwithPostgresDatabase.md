@@ -46,7 +46,7 @@ postgres ALL=(ALL:ALL) ALL
 8 unzip the sonarqube zip file using below and rename the directory
 
     unzip sonarqube-9.7.1.62043.zip
-    mv sonarqube-9.7.1.62043.zip sonarqube
+    mv sonarqube-9.7.1.62043 sonarqube
 
 9 Now add the paraeters the /etc/sysctl.conf params using below
 
@@ -66,16 +66,16 @@ reboot the server using sudo reboot
 
 sh /opt/sonarqube/bin/linux-x86-64/sonar.sh start
 
-    ALTER USER sonar WITH ENCRYPTED password 'sonar';
-
-12 Create a sonarqube database and set the owner to sonar.
-
-As this is running on Hd database which is for evaluation purpose we need to configure postgres database for sonarqube
+ As this is running on Hd database which is for evaluation purpose we need to configure postgres database for sonarqube
 
 Embedded database should be used for evaluation purposes only
 
 The embedded database will not scale, it will not support upgrading to newer versions of SonarQube, and there is no support for migrating your data out of it into a different database engine.
 
+ Stop the sonarqube using below
+  ```
+  sh /opt/sonarqube/bin/linux-x86-64/sonar.sh stop
+```
 13  Install and Configure PostgreSQL
     Add the PostgreSQL repository.
 
