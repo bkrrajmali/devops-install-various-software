@@ -58,7 +58,9 @@ postgres ALL=(ALL:ALL) ALL
     ulimit -n 65536
     ulimit -u 4096
 
-10 Once done reboot server
+reboot the server using sudo reboot
+
+10 Once done with rebooting login into sonar user using su - sonar
 
 12 Now start the sonar using below
 
