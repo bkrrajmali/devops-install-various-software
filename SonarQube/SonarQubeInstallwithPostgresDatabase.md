@@ -73,9 +73,9 @@ Embedded database should be used for evaluation purposes only
 The embedded database will not scale, it will not support upgrading to newer versions of SonarQube, and there is no support for migrating your data out of it into a different database engine.
 
  Stop the sonarqube using below
-  ```
+  ```bash
   sh /opt/sonarqube/bin/linux-x86-64/sonar.sh stop
-```
+  ```
 13  Install and Configure PostgreSQL
     Add the PostgreSQL repository.
 
