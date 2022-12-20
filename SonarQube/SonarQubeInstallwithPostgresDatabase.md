@@ -1,166 +1,147 @@
 1. Install OpenJDK 11
 
   SSH to your Ubuntu server as a non-root user with sudo access.
-  Install OpenJDK 11 and create user as postgres
+  Install OpenJDK 11 and create groups for both sonar and postgres users as below:
   
   ```bash
- sudo useradd postgres
+ sudo groupadd sonar
+ sudo groupadd postgres
  ``` 
   ```bash
-  sudo apt-get install openjdk-11-jdk -y
+sudo apt-get install openjdk-11-jdk -y
   ```
-2. Install and Configure PostgreSQL
-
-    Add the PostgreSQL repository.
-```bash
-    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
-```
-  
-3. Add the PostgreSQL signing key.
+2. Create both sonar and postgres users as below:
 
 ```bash
-    wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
-```
+sudo useradd -m -s /bin/bash sonar -g sonar
+sudo useradd -m -s /bin/bash postgres -g postgres
 
-4. Install PostgreSQL.
+```
+3. Create Passwords for both sonar and postgres as below:
 
 ```bash
-sudo apt install postgresql postgresql-contrib -y
+sudo passwd username
+sudo passwd postgres
 ```
-5. Enable the database server to start automatically on reboot.
+4. visudo from root any sudo user and add both users to sudoers as below. Add sonar user and postgres user below root:
 ```bash
-    $ sudo systemctl enable postgresql
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+sonar   ALL=(ALL:ALL) ALL
+postgres ALL=(ALL:ALL) ALL
 ```
-6. Start the database server.
+5. Change permissions on /opt as below using root user
 ```bash
-   sudo systemctl start postgresql
+    $ chmod 777 /opt from root
 ```
-7 Change the default PostgreSQL password.
+6. Login to sonar using as below and provide password
+```bash
+   su - sonar 
+   cd /opt
+```
+7 Now download sonarqube software using below in /opt directory
 
-    sudo passwd postgres
-8 Switch to the postgres user.
+    sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.7.1.62043.zip
+    
+8 unzip the sonarqube zip file using below and rename the directory
 
-    su - postgres
-9 Create a user named sonar.
+    unzip sonarqube-9.7.1.62043.zip
+    mv sonarqube-9.7.1.62043.zip sonarqube
 
-    createuser sonar
+9 Now add the paraeters the /etc/sysctl.conf params using below
 
-10 Log in to PostgreSQL.
+    sudo nano /etc/sysctl.conf
+    add below
+    
+    vm.max_map_count=262144
+    fs.file-max=65536
+    ulimit -n 65536
+    ulimit -u 4096
 
-    psql
-11 Set a password for the sonar user. Use a strong password in place of my_strong_password.
+10 Once done reboot server
+
+12 Now start the sonar using below
+
+sh /opt/sonarqube/bin/linux-x86-64/sonar.sh start
 
     ALTER USER sonar WITH ENCRYPTED password 'sonar';
 
 12 Create a sonarqube database and set the owner to sonar.
 
-   ```bash
-    CREATE DATABASE sonarqube OWNER sonar;
+As this is running on Hd database which is for evaluation purpose we need to configure postgres database for sonarqube
+
+Embedded database should be used for evaluation purposes only
+
+The embedded database will not scale, it will not support upgrading to newer versions of SonarQube, and there is no support for migrating your data out of it into a different database engine.
+
+13  Install and Configure PostgreSQL
+    Add the PostgreSQL repository.
+
+    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+    
+14 Add the PostgreSQL signing key
+
+    wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
+
+15 Install PostgreSQL.
+
+    sudo apt install postgresql postgresql-contrib -y
+
+16 Start the Postgres database as below
+
+    sudo systemctl start postgresql
+
+17 Enable the database server to start automatically on reboot.
+
+    sudo systemctl enable postgresql
+    
+19. Now login to postgres user
+ ```   
+    su - postgres
 ```
-  Grant all the privileges on the qube database to the sonar user.
+20 Create a user named sonar.
+
+    createuser sonar
+
+21 Log in to PostgreSQL.
+
+    psql
+
+22 Set a password for the sonar user. Use a strong password in place of my_strong_password.
+```
+    ALTER USER sonar WITH ENCRYPTED password 'sonar';
+```
+23 Create a sonarqube database and set the owner to sonar.
+
+     CREATE DATABASE sonarqube OWNER sonar;
+
+24 Grant all the privileges on the sonarqube database to the sonar user.
 
     GRANT ALL PRIVILEGES ON DATABASE sonarqube to sonar;
 
-13 Exit PostgreSQL.
+25 Exit PostgreSQL.
 
     \q
-
-14 Return to your non-root sudo user account.
-
-    $ exit
-
-15. Download and Install SonarQube
-
-    Install the zip utility, which is needed to unzip the SonarQube files.
+    
+26. Return to your non-root sudo user account.
 ```
-    sudo apt-get install zip -y
+    exit
 ```
- 16 Locate the latest download URL from the SonarQube official download page.
+sudo systemctl status sonar
 
-    Download the SonarQube distribution files.
-
-    sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.7.1.62043.zip
-
-  17 Unzip the downloaded file.
-
-    sudo unzip sonarqube-<VERSION_NUMBER>.zip
-
-  18 Move the unzipped files to /opt/sonarqube directory
-
-    sudo mv sonarqube-<VERSION_NUMBER> /opt/sonarqube
-
-19. Add SonarQube Group and User
-
-20 Create a dedicated user and group for SonarQube, which can not run as the root user.
-
-    Create a sonar group.
-
-    sudo groupadd sonar
-
-    Create a sonar user and set /opt/sonarqube as the home directory.
-
-    sudo useradd -d /opt/sonarqube -g sonar sonar
-
-    Grant the sonar user access to the /opt/sonarqube directory.
-
-    sudo chown sonar:sonar /opt/sonarqube -R
-
-21. Configure SonarQube
-
-    Edit the SonarQube configuration file.
-```bash
+27. Configure SonarQube. Edit the SonarQube configuration file.
+```
     sudo nano /opt/sonarqube/conf/sonar.properties
 
-    Find the following lines:
-
-    #sonar.jdbc.username=
-
-    #sonar.jdbc.password=
-
-    Uncomment the lines, and add the database user and password you created in Step 2.
-
     sonar.jdbc.username=sonar
-
     sonar.jdbc.password=sonar
-```
-
-Below those two lines, add the sonar.jdbc.url.
-
     sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
-
- Save and exit the file.
- 
- Start the SonarQube service.
+    sonar.search.javaOpts=-Xmx512m -Xms512m -XX:MaxDirectMemorySize=256m -XX:+HeapDumpOnOutOfMemoryError
 ```
-  sudo systemctl start sonar
-
-  Check the service status.
-
-  sudo systemctl status sonar
- ```  
-  22. Modify Kernel System Limits
-
-    sudo nano /etc/sysctl.conf
-
-    Add the following lines.
-
-    vm.max_map_count=262144
-
-    fs.file-max=65536
-
-    ulimit -n 65536
-
-    ulimit -u 4096
-
-    Save and exit the file.
-
-    Reboot the system to apply the changes.
-
-    $ sudo reboot
+28. Now start the Sonarqube 
 ```
-23. Access SonarQube Web Interface
-
-Access SonarQube in a web browser at your server's IP address on port 9000. For example:
-
-http://192.0.2.123:9000
-
+    sh /opt/sonarqube/bin/linux-x86-64/sonar.sh start
+```
+29. Access SonarQube in a web browser at your server's IP address on port 9000. For example:
+    ```
+    http://192.168.31.226:9000/projects/create
