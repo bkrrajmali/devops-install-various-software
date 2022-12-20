@@ -76,7 +76,7 @@ The embedded database will not scale, it will not support upgrading to newer ver
   ```bash
   sh /opt/sonarqube/bin/linux-x86-64/sonar.sh stop
   ```
-13  Install and Configure PostgreSQL
+13  Login using postgres user and Install and Configure PostgreSQL
     Add the PostgreSQL repository.
 
     sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
