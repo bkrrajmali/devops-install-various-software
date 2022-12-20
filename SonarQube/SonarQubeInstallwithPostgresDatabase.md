@@ -63,9 +63,9 @@ reboot the server using sudo reboot
 10 Once done with rebooting login into sonar user using su - sonar
 
 12 Now start the sonar using below
-
+```bash
 sh /opt/sonarqube/bin/linux-x86-64/sonar.sh start
-
+```
  As this is running on Hd database which is for evaluation purpose we need to configure postgres database for sonarqube
 
 Embedded database should be used for evaluation purposes only
