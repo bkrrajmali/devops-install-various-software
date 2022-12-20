@@ -30,9 +30,9 @@ root    ALL=(ALL:ALL) ALL
 sonar   ALL=(ALL:ALL) ALL
 postgres ALL=(ALL:ALL) ALL
 ```
-5. Change permissions on /opt as below using root user
+5. Change permissions on /opt as below using root user or any user whose have sudo access
 ```bash
-    chmod 777 /opt
+ sudo chmod 777 /opt
 ```
 6. Login to sonar using as below and provide password
 ```bash
