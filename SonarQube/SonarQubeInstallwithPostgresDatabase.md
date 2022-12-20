@@ -165,7 +165,7 @@ Provide Project display name* as MyProject & Project key* as MyProject
 
 34. Go to Git repo Home
  and give as below
- 
+ ```
  mvn clean verify sonar:sonar \
   -Dsonar.projectKey=MyProject \
   -Dsonar.host.url=http://localhost:9000 \
