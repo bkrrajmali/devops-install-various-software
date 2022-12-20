@@ -155,7 +155,7 @@ The embedded database will not scale, it will not support upgrading to newer ver
  
 31. clone  git repo to the server using below
 ```
-git clone https://github.com/bkrraj/hello-world.git
+git clone https://github.com/bkrraj/java-app.git
 ```
 32. Generate the token from sonarqube portal
     Got to Administrator and click on MyAccount---Click on Security and Genreate token
