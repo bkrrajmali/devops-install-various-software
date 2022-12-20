@@ -137,3 +137,36 @@ The embedded database will not scale, it will not support upgrading to newer ver
 27. Access SonarQube in a web browser at your server's IP address on port 9000. For example:
     ```
     http://192.168.31.226:9000/projects/create
+
+28. Install and configure Maven on the server(Download maven using below in /opt directory)
+    ```
+    cd /opt
+    wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+    
+29. Move directory from apache-maven-3.8.6 apache-maven
+   ```
+  mv apache-maven-3.8.6 apache-maven
+   ```
+30. Edit .bashrc.  Got to Home directory using cd command
+ ```
+ export PATH=$PATH:/opt/apache-maven/bin
+  mvn -version
+ ```
+ 
+31. clone  git repo to the server using below
+```
+git clone https://github.com/bkrraj/hello-world.git
+```
+32. Generate the token from sonarqube portal
+    Got to Administrator and click on MyAccount---Click on Security and Genreate token
+    
+33. Create Project using manualy option
+Provide Project display name* as MyProject & Project key* as MyProject
+
+34. Go to Git repo Home
+ and give as below
+ 
+ mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=MyProject \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=sqa_07a39fe27bffda06c062fbe3a3126777181dcb9d
