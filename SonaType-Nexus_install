@@ -1,0 +1,10 @@
+1. Run apt update
+
+  bash```
+  ```
+sudo apt update  
+
+  ```
+
+2. install Jave 8
+```
