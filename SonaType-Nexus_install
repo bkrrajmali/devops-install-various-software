@@ -1,8 +1,7 @@
-# Nexus Install
 
-1-Run apt update
 
-  ```bash 
-    sudo apt update  
-   ```
-Step-2- To install OpenJDK 11, run:
+```
+function test() {
+  console.log("notice the blank line before this function?");
+}
+```
