@@ -1,10 +1,8 @@
-1. Run apt update
+# Nexus Install
 
-  bash```
-  ```
-sudo apt update  
+1-Run apt update
 
-  ```
-
-2. install Jave 8
-```
+  ```bash 
+    sudo apt update  
+   ```
+Step-2- To install OpenJDK 11, run:
