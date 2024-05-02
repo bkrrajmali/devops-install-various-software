@@ -6,3 +6,6 @@ Installation Various Software
 - **Apple**: Malus domestica
 - **Banana**: Musa acuminata
 - **Cherry**: Prunus cerasus
+| foo | bar |
+| --- | --- |
+| baz | bim |
