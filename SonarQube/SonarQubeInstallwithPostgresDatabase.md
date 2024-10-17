@@ -41,7 +41,7 @@ postgres ALL=(ALL:ALL) ALL
 ```
 7 Now download sonarqube software using below in /opt directory
 
-    sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.7.1.62043.zip
+    sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.7.0.96327.zip
     
 8 unzip the sonarqube zip file using below and rename the directory
 
