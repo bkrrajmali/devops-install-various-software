@@ -2,7 +2,7 @@ Step-1 First, open a terminal window and update the system package repository by
 ```
 sudo apt update
 ```
-Step-2- To install OpenJDK 8, run:
+Step-2- To install OpenJDK 17, run:
 ```
 sudo apt install openjdk-17-jdk -y
 ```
