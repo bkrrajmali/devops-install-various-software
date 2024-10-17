@@ -4,7 +4,7 @@ sudo apt update
 ```
 Step-2- To install OpenJDK 8, run:
 ```
-sudo apt install openjdk-8-jdk -y
+sudo apt install openjdk-17-jdk -y
 ```
 Step-3: Create Group as nexus
 ```
