@@ -26,7 +26,7 @@ nexus ALL=(ALL) NOPASSWD: ALL
 ```
 Step-8 Download nexus in /opt
 ```
-https://download.sonatype.com/nexus/3/nexus-3.44.0-01-unix.tar.gz
+https://download.sonatype.com/nexus/3/nexus-3.73.0-12-unix.tar.gz
 ```
 
 Step-9 Untar (extract the file)
