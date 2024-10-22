@@ -54,6 +54,8 @@ postgres ALL=(ALL:ALL) ALL
     add below
     
     vm.max_map_count=262144
+    sudo nano /opt/sonar/conf/sonar.properties
+    sonar.search.javaOpts=-Xms512m -Xmx1g
    
 
 reboot the server using sudo reboot
