@@ -8,7 +8,7 @@
  sudo groupadd postgres
  ``` 
   ```bash
-sudo apt-get install openjdk-11-jdk -y
+sudo apt-get install openjdk-17-jdk -y
   ```
 2. Create both sonar and postgres users as below:
 
