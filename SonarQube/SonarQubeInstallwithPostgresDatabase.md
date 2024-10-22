@@ -54,9 +54,7 @@ postgres ALL=(ALL:ALL) ALL
     add below
     
     vm.max_map_count=262144
-    fs.file-max=65536
-    ulimit -n 65536
-    ulimit -u 4096
+   
 
 reboot the server using sudo reboot
 
